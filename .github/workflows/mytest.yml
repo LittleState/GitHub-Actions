@@ -6,6 +6,9 @@ jobs:
     steps:
       - run: pwd
       - run: ls
+      - run: |
+          free -h
+          cat /proc/cpuinfo
   job2: 
     runs-on: windows-latest
     steps:
