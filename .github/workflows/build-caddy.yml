@@ -11,10 +11,10 @@ on:
         options:
         - linux/arm64
         - linux/amd64
-      docker_tag:
-        description: 'Docker base image tag'
-        required: true
-        default: '2.8.4'
+      # docker_tag:
+      #   description: 'Docker base image tag'
+      #   required: true
+      #   default: '2.8.4'
       tag:
         description: 'My docker image tag'
         required: true
@@ -37,11 +37,11 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_TOKEN }}
           
-    - name: Replace base image tag in Dockerfile
-      run: |
-        TAG=${{ github.event.inputs.tag }}
-        sed -i "s|FROM caddy:builder-alpine AS builder|FROM caddy:${{ inputs.docker_tag }}-builder-alpine AS builder|" ./caddy/Dockerfile
-        sed -i "s|FROM caddy:alpine|FROM caddy:${{ inputs.docker_tag }}-alpine|" ./caddy/Dockerfile
+    # - name: Replace base image tag in Dockerfile
+    #   run: |
+    #     TAG=${{ github.event.inputs.tag }}
+    #     sed -i "s|FROM caddy:builder-alpine AS builder|FROM caddy:${{ inputs.docker_tag }}-builder-alpine AS builder|" ./caddy/Dockerfile
+    #     sed -i "s|FROM caddy:alpine|FROM caddy:${{ inputs.docker_tag }}-alpine|" ./caddy/Dockerfile
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v6
